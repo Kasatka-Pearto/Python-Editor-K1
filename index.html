@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#171821">
+  <meta name="description" content="PyPlayground — онлайн-редактор и среда запуска Python в браузере.">
+  <title>PyPlayground — Python Online</title>
+
+  <link rel="stylesheet" href="style.css">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.52.2/min/vs/loader.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/pyodide/v0.27.7/full/pyodide.js"></script>
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <a class="brand" href="./" aria-label="PyPlayground — главная">
+        <span class="brand-icon">Py</span>
+        <span>PyPlayground</span>
+        <span class="version">BETA</span>
+      </a>
+
+      <div class="top-actions">
+        <span id="runtimeStatus" class="runtime-status">
+          <span class="status-dot"></span>
+          Загрузка Python...
+        </span>
+
+        <button id="themeBtn" class="icon-btn" title="Сменить тему"
+          aria-label="Сменить тему">☀️</button>
+      </div>
+    </header>
+
+    <main class="workspace">
+      <section class="editor-panel panel">
+        <div class="panel-heading">
+          <div class="file-tab">
+            <span class="python-icon">🐍</span>
+            <span>main.py</span>
+            <span id="savedIndicator" class="saved-indicator" title="Автосохранение">●</span>
+          </div>
+
+          <div class="editor-actions">
+            <button id="resetBtn" class="small-btn" title="Вернуть пример">
+              ↺ <span>Сбросить</span>
+            </button>
+            <button id="downloadBtn" class="small-btn" title="Скачать main.py">
+              ↓ <span>Скачать</span>
+            </button>
+          </div>
+        </div>
+
+        <div id="editor" class="editor"></div>
+
+        <div class="editor-footer">
+          <span>Python 3 · Pyodide</span>
+          <span id="cursorPosition">Строка 1, столбец 1</span>
+          <span>UTF-8</span>
+        </div>
+      </section>
+
+      <section class="output-panel panel">
+        <div class="panel-heading output-heading">
+          <div class="output-tabs">
+            <button class="output-tab active" id="consoleTab">⌘ Консоль</button>
+            <span class="output-tab-label">Вывод программы</span>
+          </div>
+
+          <button id="clearBtn" class="small-btn" title="Очистить консоль">
+            ✕ <span>Очистить</span>
+          </button>
+        </div>
+
+        <div id="console" class="console" aria-live="polite">
+          <div class="welcome-message">
+            <div class="welcome-icon">🐍</div>
+            <h2>Добро пожаловать!</h2>
+            <p>Напиши Python-код и нажми «Запустить».</p>
+            <p class="muted">Результат появится здесь.</p>
+          </div>
+        </div>
+
+        <div id="inputArea" class="input-area hidden">
+          <label for="stdinInput" id="inputPrompt">Ввод программы</label>
+          <form id="stdinForm" class="stdin-form">
+            <input id="stdinInput" type="text" autocomplete="off"
+              placeholder="Введи значение..." aria-label="Ввод для Python">
+            <button type="submit" class="send-btn">↵</button>
+          </form>
+        </div>
+
+        <div class="console-footer">
+          <span id="executionStatus">Ожидание запуска</span>
+          <span id="executionTime"></span>
+        </div>
+      </section>
+    </main>
+
+    <footer class="bottom-bar">
+      <div class="bottom-info">
+        <span class="green-dot"></span>
+        <span>Работает в браузере</span>
+      </div>
+
+      <div class="bottom-actions">
+        <button id="stopBtn" class="stop-btn" disabled>■ Остановить</button>
+        <button id="runBtn" class="run-btn" disabled>
+          <span>▶</span> Запустить
+        </button>
+      </div>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
